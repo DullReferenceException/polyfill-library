@@ -1,6 +1,6 @@
 /* global Type, GetMethod, Call, OrdinaryToPrimitive */
 // 7.1.1. ToPrimitive ( input [ , PreferredType ] )
-var ToPrimitive = (function(input /* [, PreferredType] */) { // eslint-disable-line no-unused-vars
+var ToPrimitive = function(input /* [, PreferredType] */) { // eslint-disable-line no-unused-vars
 	var PreferredType = arguments.length > 1 ? arguments[1] : undefined;
 	// 1. Assert: input is an ECMAScript language value.
 	// 2. If Type(input) is Object, then
@@ -16,7 +16,7 @@ var ToPrimitive = (function(input /* [, PreferredType] */) { // eslint-disable-l
 			hint = 'number';
 		}
 		// d. Let exoticToPrim be ? GetMethod(input, @@toPrimitive).
-		var exoticToPrim = typeof this.Symbol === 'function' && typeof this.Symbol.toPrimitive === 'symbol' ? GetMethod(input, this.Symbol.toPrimitive) : undefined;
+		var exoticToPrim = typeof self.Symbol === 'function' && typeof self.Symbol.toPrimitive === 'symbol' ? GetMethod(input, self.Symbol.toPrimitive) : undefined;
 		// e. If exoticToPrim is not undefined, then
 		if (exoticToPrim !== undefined) {
 			// i. Let result be ? Call(exoticToPrim, input, « hint »).
@@ -37,4 +37,4 @@ var ToPrimitive = (function(input /* [, PreferredType] */) { // eslint-disable-l
 	}
 	// 3. Return input
 	return input;
-}).bind(this);
+};

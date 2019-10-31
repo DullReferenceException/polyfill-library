@@ -1,6 +1,6 @@
 /* global IsArray, ArrayCreate, Get, Type, IsConstructor, Construct */
 // 9.4.2.3. ArraySpeciesCreate ( originalArray, length )
-var ArraySpeciesCreate = (function (originalArray, length) { // eslint-disable-line no-unused-vars
+var ArraySpeciesCreate = function (originalArray, length) { // eslint-disable-line no-unused-vars
 	// 1. Assert: length is an integer Number ≥ 0.
 	// 2. If length is -0, set length to +0.
 	if (1/length === -Infinity) {
@@ -29,7 +29,7 @@ var ArraySpeciesCreate = (function (originalArray, length) { // eslint-disable-l
 	// 7. If Type(C) is Object, then
 	if (Type(C) === 'object') {
 		// a. Set C to ? Get(C, @@species).
-		C = 'Symbol' in this && 'species' in this.Symbol ? Get(C, this.Symbol.species) : undefined;
+		C = 'Symbol' in self && 'species' in self.Symbol ? Get(C, self.Symbol.species) : undefined;
 		// b. If C is null, set C to undefined.
 		if (C === null) {
 			C = undefined;
@@ -45,4 +45,4 @@ var ArraySpeciesCreate = (function (originalArray, length) { // eslint-disable-l
 	}
 	// 10. Return ? Construct(C, « length »).
 	return Construct(C, [length]);
-}).bind(this);
+};

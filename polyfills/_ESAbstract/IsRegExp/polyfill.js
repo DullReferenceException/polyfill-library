@@ -1,12 +1,12 @@
 /* global Type, Get, ToBoolean */
 // 7.2.8. IsRegExp ( argument )
-var IsRegExp = (function(argument) { // eslint-disable-line no-unused-vars
+var IsRegExp = function(argument) { // eslint-disable-line no-unused-vars
 	// 1. If Type(argument) is not Object, return false.
 	if (Type(argument) !== 'object') {
 		return false;
 	}
 	// 2. Let matcher be ? Get(argument, @@match).
-	var matcher = 'Symbol' in this && 'match' in this.Symbol ? Get(argument, this.Symbol.match) : undefined;
+	var matcher = 'Symbol' in self && 'match' in self.Symbol ? Get(argument, self.Symbol.match) : undefined;
 	// 3. If matcher is not undefined, return ToBoolean(matcher).
 	if (matcher !== undefined) {
 		return ToBoolean(matcher);
@@ -22,4 +22,4 @@ var IsRegExp = (function(argument) { // eslint-disable-line no-unused-vars
 	}
 	// 5. Return false.
 	return false;
-}).bind(this);
+};

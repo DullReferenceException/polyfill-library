@@ -1,6 +1,6 @@
 /* global Get, Type, IsConstructor */
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
-var SpeciesConstructor = (function (O, defaultConstructor) { // eslint-disable-line no-unused-vars
+var SpeciesConstructor = function (O, defaultConstructor) { // eslint-disable-line no-unused-vars
 	// 7.3.20.1 Assert: Type(O) is Object.
 	// 7.3.20.2 Let C be ? Get(O, "constructor").
 	var C = Get(O, "constructor");
@@ -13,7 +13,7 @@ var SpeciesConstructor = (function (O, defaultConstructor) { // eslint-disable-l
 		throw new TypeError('O.constructor is not an Object');
 	}
 	// 7.3.20.5 Let S be ? Get(C, @@species).
-	var S = typeof this.Symbol === 'function' && typeof this.Symbol.species === 'symbol' ? C[this.Symbol.species] : undefined;
+	var S = typeof self.Symbol === 'function' && typeof self.Symbol.species === 'symbol' ? C[self.Symbol.species] : undefined;
 	// 7.3.20.6 If S is either undefined or null, return defaultConstructor.
 	if (S === undefined || S === null) {
 		return defaultConstructor;
@@ -24,4 +24,4 @@ var SpeciesConstructor = (function (O, defaultConstructor) { // eslint-disable-l
 	}
 	// 7.3.20.8 Throw a TypeError exception.
 	throw new TypeError('No constructor found');
-}).bind(this);
+};
